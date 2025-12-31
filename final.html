@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ความในใจสุดท้าย</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ff758f; --bg: #fff0f3; }
+        body {
+            margin: 0; padding: 0; font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(#ffccd5 2px, transparent 2px);
+            background-size: 30px 30px;
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%; max-width: 600px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 117, 143, 0.3);
+            border: 4px solid white;
+            animation: popIn 0.8s ease-out;
+        }
+
+        h1 {
+            font-family: 'Itim', cursive; color: #ff758f;
+            font-size: 2rem; margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .video-wrapper {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #000;
+            margin-bottom: 20px;
+        }
+
+        video {
+            width: 100%; height: auto; display: block;
+        }
+
+        .final-msg {
+            margin-top: 15px;
+            color: #666; font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .btn-restart {
+            display: inline-block; margin-top: 20px;
+            background: #ffb3c1; color: white; padding: 10px 25px;
+            border-radius: 50px; text-decoration: none;
+            font-family: 'Itim'; transition: 0.3s;
+        }
+        .btn-restart:hover { background: #ff758f; transform: scale(1.05); }
+
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .floating-heart { position: absolute; animation: floatUp linear infinite; z-index: 0; opacity: 0.6; pointer-events: none; }
+        @keyframes floatUp { from { transform: translateY(100vh); } to { transform: translateY(-10vh); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1>อยากจะบอกว่า... 💖</h1>
+
+            <div class="video-wrapper">
+                <video controls loop autoplay muted width="100%">
+                    <source src="D:\rrr\063D80B9-01A1-4AD1-AE6C-DCF88A7876C2.mp4" type="video/mp4">
+                    Browser ของเธอไม่รองรับวิดีโออ่าาา T_T
+                </video>
+            </div>
+
+            <div class="final-msg">
+                ขอบคุณที่เข้ามาเป็นเรื่องราวดีๆ ในชีวิตเค้านะ <br>
+                รักเธอที่สุดน๊าาา  🥰
+            </div>
+
+            <a href="index.html" class="btn-restart">ดูใหม่อีกรอบ ↺</a>
+        </div>
+    </div>
+
+    <script>
+        function createDecor() {
+            const el = document.createElement('div');
+            el.innerText = ['❤️','🎥','✨'][Math.floor(Math.random()*3)];
+            el.className = 'floating-heart';
+            el.style.left = Math.random()*100 + 'vw';
+            el.style.fontSize = (Math.random()*20+10)+'px';
+            el.style.animationDuration = (Math.random()*3+3)+'s';
+            el.style.position = 'fixed';
+            document.body.appendChild(el);
+            setTimeout(()=>el.remove(), 6000);
+        }
+        setInterval(createDecor, 500);
+    </script>
+</body>
+</html>

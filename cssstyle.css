@@ -1,0 +1,87 @@
+/* css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;500&display=swap');
+
+:root {
+    --primary-color: #ff8fa3; /* ชมพูหวาน */
+    --secondary-color: #ffccd5; /* ชมพูอ่อน */
+    --text-color: #594a4e;
+    --bg-gradient: linear-gradient(180deg, #fff0f3 0%, #fff 100%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Sarabun', sans-serif; /* ฟอนต์อ่านง่าย */
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* กล่องเนื้อหาตรงกลาง (Mobile Friendly) */
+.container {
+    width: 100%;
+    max-width: 420px; /* ขนาดเท่ามือถือ */
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 183, 178, 0.2);
+}
+
+h1, h2 {
+    font-family: 'Itim', cursive; /* ฟอนต์หัวข้อน่ารักๆ */
+    color: var(--primary-color);
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* ปุ่มกดไปต่อ */
+.btn-next {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(255, 143, 163, 0.4);
+    transition: transform 0.2s;
+    border: none;
+    cursor: pointer;
+    font-family: 'Itim', cursive;
+}
+
+.btn-next:hover {
+    transform: scale(1.05);
+}
+
+/* Animation พื้นฐาน */
+.fade-in {
+    animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+img {
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

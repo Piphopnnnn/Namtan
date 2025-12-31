@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำอวยพรถึงเธอ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* ธีมสีและการตกแต่ง (เหมือนหน้าแรก) */
+        :root { --primary: #ff758f; --bg: #fff0f3; }
+        body {
+            margin: 0; padding: 0; font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(#ffccd5 2px, transparent 2px);
+            background-size: 30px 30px;
+            height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.2);
+            max-width: 400px; width: 85%; text-align: left;
+            position: relative; z-index: 10; border: 2px solid white;
+        }
+        h1 { font-family: 'Itim', cursive; color: var(--primary); text-align: center; margin-top: 0;}
+        #typewriter { font-size: 1.1rem; color: #555; line-height: 1.8; min-height: 150px; }
+        .btn-next {
+            display: block; width: 100%; text-align: center;
+            background: var(--primary); color: white; padding: 12px 0;
+            border-radius: 50px; text-decoration: none; margin-top: 20px;
+            font-family: 'Itim', cursive; transition: 0.3s; opacity: 0; pointer-events: none;
+        }
+        .btn-next.show { opacity: 1; pointer-events: auto; }
+        .floating-emoji { position: absolute; animation: floatUp linear infinite; z-index: 1; opacity: 0.6; }
+        @keyframes floatUp { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>ถึง...เธอนะที่รักของเค้า❤️</h1>
+        <div id="typewriter"></div>
+        <a href="story.html" class="btn-next" id="btnNext">ไปดูต่อสิแฟนนนนน 👉</a>
+    </div>
+
+    <script>
+        // --- แก้ไขข้อความอวยพรตรงนี้ ---
+        const text = "เค้าอาจเป็นแฟนที่พูดไม่เพราะไปบ้าง กวนบ่อยจนเธอรำคาญ แต่รักเธอจริง ๆ นะ 😆 ปีใหม่นี้ขอให้เธอมีความสุขเยอะ ๆ แล้วก็อยู่ให้เค้าแกล้งไปนาน ๆ เลย 💕";
+        
+        const typeWriterElement = document.getElementById('typewriter');
+        const btnNext = document.getElementById('btnNext');
+        let i = 0;
+
+        function type() {
+            if (i < text.length) {
+                typeWriterElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, 50); // ความเร็วการพิมพ์
+            } else {
+                btnNext.classList.add('show'); // พิมพ์จบแล้วโชว์ปุ่ม
+            }
+        }
+        
+        // ฟังก์ชันของตกแต่งลอย
+        function createDecor() {
+            const el = document.createElement('div');
+            el.innerText = ['✨','🎉','❤️'][Math.floor(Math.random()*3)];
+            el.className = 'floating-emoji';
+            el.style.left = Math.random()*100 + 'vw';
+            el.style.fontSize = (Math.random()*20+10)+'px';
+            el.style.animationDuration = (Math.random()*3+3)+'s';
+            document.body.appendChild(el);
+            setTimeout(()=>el.remove(), 6000);
+        }
+        setInterval(createDecor, 400);
+        window.onload = type;
+    </script>
+</body>
+</html>

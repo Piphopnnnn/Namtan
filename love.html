@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Love You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. ส่วนตั้งค่าสีและพื้นหลัง (CSS Variables)
+           ========================================= */
+        :root {
+            --primary-color: #ff758f;   /* สีปุ่มและหัวข้อ */
+            --bg-color: #fff0f3;        /* สีพื้นหลัง */
+            --card-bg: rgba(255, 255, 255, 0.95); /* สีการ์ด */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            /* ลายพื้นหลังจุดเล็กๆ */
+            background-image: radial-gradient(#ffccd5 2px, transparent 2px);
+            background-size: 30px 30px;
+            
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        /* กล่องการ์ดตรงกลาง */
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            border: 3px solid white;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Itim', cursive;
+            color: var(--primary-color);
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 25px;
+        }
+
+        /* พื้นที่แสดงข้อความสุ่ม */
+        .message-box {
+            min-height: 80px; /* จองพื้นที่ไว้กันข้อความกระโดด */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .message-text {
+            font-size: 18px;
+            color: #594a4e;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Animation ตอนข้อความเด้งขึ้นมา */
+        .pop-in {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* ปุ่มหลัก (กดรับความน่ารัก) */
+        .btn-main {
+            background: linear-gradient(45deg, #ff758f, #ff4d6d);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Itim', cursive;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-main:active {
+            transform: scale(0.95);
+        }
+
+        /* ปุ่มไปหน้าถัดไป (จะซ่อนไว้ก่อน) */
+        .btn-next {
+            display: none; /* ซ่อนไว้ก่อน */
+            margin-top: 20px;
+            color: #ff758f;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px dashed #ff758f;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-next.show {
+            display: inline-block;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+
+        /* ไอคอนหัวใจตกแต่งพื้นหลัง */
+        .floating-heart {
+            position: absolute;
+            color: #ff4d6d;
+            animation: floatUp linear infinite;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 0.8; }
+            to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>รักเธอเพราะว่า... 💖</h1>
+        <p class="subtitle">(ลองกดดูสิ ว่าวันนี้เค้าจะบอกอะไร 👀)</p>
+
+        <div class="message-box">
+            <div id="display-text" class="message-text">
+                ...
+            </div>
+        </div>
+
+        <button class="btn-main" onclick="showRandomMessage()">
+            กดรับความน่ารัก ✨
+        </button>
+
+        <br>
+        <a href="final.html" class="btn-next" id="next-link">
+            ไปดูความในใจสุดท้ายกันต่อ 👉
+        </a>
+    </div>
+
+    <script>
+        /* =========================================
+           2. ส่วนแก้ไขข้อความ (JavaScript)
+           ========================================= */
+        const reasons = [
+            "เพราะเธอยิ้มแล้วโลกของเค้าดูสดใสขึ้น 10 เท่าเลย! 🌈",
+            "เพราะอยู่กับเธอแล้วเค้ารู้สึกเป็นตัวเองที่สุด 🧸",
+            "เพราะเธอชอบบ่นว่าอ้วน แต่ก็กินเก่งที่สุด (น่าร๊ากก) 🍕",
+            "เพราะเสียงหัวเราะของเธอคือเพลงโปรดของเค้า 🎶",
+            "เพราะเธอคอยซัพพอร์ตเค้าในวันที่เหนื่อยๆ ✌️",
+            "เพราะแค่มีเธออยู่ข้างๆ ก็อุ่นใจแล้ว 🛋️",
+            "เพราะเธอเป็นเธอแบบที่ไม่ต้องพยายามเป็นใครเลย ❤️",
+            "เพราะ... ไม่บอกดีกว่า รู้แค่ว่ารักก็พอ! 😜",  
+            "เพราะเค้ารักเธอ อยากมีเธอตลอดไปนะครับ ❤️"
+        ];
+        /* ☝️ ผมเติมเครื่องหมาย , ที่หายไปตรงท้ายบรรทัดบนให้แล้วครับ */
+
+        // ตัวแปรเก็บสถานะ
+        const displayText = document.getElementById('display-text');
+        const nextLink = document.getElementById('next-link');
+        let clickCount = 0;
+
+        function showRandomMessage() {
+            // 1. สุ่มข้อความ
+            const randomIndex = Math.floor(Math.random() * reasons.length);
+            const message = reasons[randomIndex];
+
+            // 2. ใส่ข้อความลงใน HTML
+            displayText.innerText = message;
+
+            // 3. ใส่ Animation (ลบคลาสเก่าออกก่อน แล้วใส่ใหม่เพื่อให้เล่นซ้ำได้)
+            displayText.classList.remove('pop-in');
+            void displayText.offsetWidth; // เทคนิค Trigger reflow
+            displayText.classList.add('pop-in');
+
+            // 4. ถ้ากดครั้งแรก ให้โชว์ปุ่ม "ไปต่อ"
+            clickCount++;
+            if (clickCount === 1) {
+                nextLink.classList.add('show');
+            }
+            
+            // 5. สร้างเอฟเฟกต์หัวใจเล็กๆ รอบปุ่ม (Optional)
+            createMiniHearts();
+        }
+
+        // ฟังก์ชันสร้างพื้นหลังดุ๊กดิ๊ก (เพื่อให้เหมือนหน้าอื่นๆ)
+        function createBackgroundDecor() {
+            const el = document.createElement('div');
+            el.innerHTML = ['❤️', '✨', '🌸', '🥰'][Math.floor(Math.random() * 4)];
+            el.className = 'floating-heart';
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 7000);
+        }
+        setInterval(createBackgroundDecor, 400); // สร้างใหม่ทุก 0.4 วินาที
+
+        // ฟังก์ชันสร้างหัวใจเล็กๆ รอบปุ่มตอนกด
+        function createMiniHearts() {
+            for(let i=0; i<5; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = (50 + (Math.random() * 20 - 10)) + '%';
+                heart.style.top = (60 + (Math.random() * 20 - 10)) + '%';
+                heart.style.fontSize = '20px';
+                heart.style.transition = '1s';
+                heart.style.opacity = '1';
+                heart.style.zIndex = '100';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.style.transform = `translate(${Math.random()*100-50}px, -100px)`;
+                    heart.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+    </script>
+</body>
+</html>

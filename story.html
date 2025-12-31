@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เรื่องราวของเรา</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Sarabun:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #ff758f; --bg: #fff0f3; }
+        body {
+            margin: 0; padding: 0; font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(#ffe3e8 2px, transparent 2px);
+            background-size: 20px 20px;
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .container {
+            width: 95%;
+            /* ⬆️ ขยายความกว้างสูงสุดของคอนเทนเนอร์เพิ่มขึ้น */
+            max-width: 1000px; 
+            padding: 30px 0;
+            z-index: 10;
+        }
+        h1 {
+            text-align: center; font-family: 'Itim'; color: #ff758f;
+            /* ⬆️ เพิ่มขนาดหัวข้อ */
+            font-size: 2.5rem; 
+            text-shadow: 2px 2px white; margin-bottom: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* ⬆️ เพิ่มระยะห่างระหว่างรูปให้ดูไม่อึดอัด */
+            gap: 15px; 
+        }
+
+        .memory-card {
+            background: white; 
+            /* ⬆️ เพิ่ม padding ในการ์ด */
+            padding: 10px; 
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;
+            animation: popIn 0.5s ease-out;
+            display: flex; flex-direction: column;
+        }
+
+        .memory-card img {
+            width: 100%;
+            /* 🔥🔥 ส่วนสำคัญ: ขยายความสูงของรูปภาพให้ใหญ่ขึ้นมาก 🔥🔥 */
+            height: 220px; 
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .caption { 
+            margin-top: 8px; color: #666; 
+            /* ⬆️ เพิ่มขนาดตัวหนังสือแคปชั่น */
+            font-size: 1rem; 
+            font-family: 'Itim'; 
+        }
+
+        .btn-next {
+            display: block; width: 220px; margin: 40px auto;
+            background: var(--primary); color: white; padding: 15px; border-radius: 50px;
+            text-decoration: none; text-align: center; font-family: 'Itim', cursive;
+            font-size: 1.2rem; /* เพิ่มขนาดปุ่ม */
+            box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4);
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .floating-emoji { position: absolute; animation: floatUp linear infinite; z-index: 0; opacity: 0.6; pointer-events: none; }
+        @keyframes floatUp { from { transform: translateY(100vh); } to { transform: translateY(-10vh); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>น่ารักป้าวววว 📸</h1>
+
+        <div class="gallery-grid">
+            <div class="memory-card">
+                <img src="D:\rrr\314FCE8A-F631-4410-8A30-84A1A752CD18.png" alt="รูป 1">
+                <div class="caption">ไว้หนวดก็โอเคนะเนี่ยแฟนนน</div>
+            </div>
+            <div class="memory-card">
+                <img src="D:\rrr\C758B2B9-FCF7-4E46-91FF-E95086D0B5D0.jpg" alt="รูป 2">
+                <div class="caption">เดทแรกอ่าาา</div>
+            </div>
+            <div class="memory-card">
+                <img src="D:\rrr\95D267E2-7B11-4876-B210-393BF857A0E8.jpg" alt="รูป 3">
+                <div class="caption">ชอบรูปนี้มากกกก แฟนสวย</div>
+            </div>
+            <div class="memory-card">
+                <img src="D:\rrr\36B06649-C91C-473F-9AFF-60386865EA76.png" alt="รูป 4">
+                <div class="caption">น่าร้ากกกกกก</div>
+            </div>
+            <div class="memory-card">
+                <img src="D:\rrr\E07DA3EF-F23B-4AB1-9781-EF8F63B61023.jpg" alt="รูป 5">
+                <div class="caption">แคปชั่น 5</div>
+            </div>
+            <div class="memory-card">
+                <img src="D:\rrr\F5563AF9-F354-456C-8943-984254378962.png" alt="รูป 6">
+                <div class="caption">แคปชั่น 6</div>
+            </div>
+        </div>
+
+        <a href="love.html" class="btn-next">ไปดูต่อสิแฟนรอไรอ่าาาา</a>
+    </div>
+
+    <script>
+        // Script ไอคอนลอยเหมือนเดิม
+        function createDecor() {
+            const el = document.createElement('div');
+            el.innerText = ['📸','💖', '✨'][Math.floor(Math.random()*3)];
+            el.className = 'floating-emoji';
+            el.style.left = Math.random()*100 + 'vw';
+            el.style.fontSize = (Math.random()*20+10)+'px';
+            el.style.animationDuration = (Math.random()*3+3)+'s';
+            el.style.position = 'fixed';
+            document.body.appendChild(el);
+            setTimeout(()=>el.remove(), 6000);
+        }
+        setInterval(createDecor, 600);
+    </script>
+</body>
+</html>
